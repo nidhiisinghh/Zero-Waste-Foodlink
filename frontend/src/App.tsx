@@ -9,11 +9,13 @@ import HistoryPage from './pages/common/HistoryPage';
 import DonationDetailsPage from './pages/common/DonationDetailsPage';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from './context/ThemeContext';
+import { CursorEffect } from './components/ui/CursorEffect';
 
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <CursorEffect />
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
