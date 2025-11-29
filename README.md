@@ -1,4 +1,4 @@
-# Zero-Waste FoodLink 🍎🤝
+# Zero-Waste FoodLink 🍕
 
 **Zero-Waste FoodLink** is a web platform designed to bridge the gap between abundance and scarcity. It connects restaurants with surplus food to NGOs and charities that feed the hungry, streamlining the donation process to reduce food waste and maximize social impact.
 
