@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import {
     ArrowRight,
     ChefHat,
@@ -30,8 +30,6 @@ import {
 } from 'lucide-react';
 import { ThemeToggle } from '../components/ThemeToggle';
 
-import { useCurveTransition } from '../components/ui/CurveTransition';
-
 export default function LandingPage() {
     const navigate = useNavigate();
     const { triggerTransition } = useCurveTransition();
@@ -53,8 +51,8 @@ export default function LandingPage() {
                         <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-600/20">
                             <Leaf size={16} className="text-white" />
                         </div>
-                        <span className="text-xl font-bold text-stone-800 dark:text-stone-100 tracking-tight">
-                            FoodLink
+                        <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+                            Platr
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
@@ -120,19 +118,29 @@ export default function LandingPage() {
                             Connecting Surplus to Scarcity
                         </div>
 
-                        <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[1.1] text-stone-900 dark:text-white relative z-10">
-                            Turn Excess into <br />
-                            <span className="text-emerald-600 dark:text-emerald-500 relative inline-block">
-                                Impact.
-                                <svg className="absolute w-full h-3 -bottom-1 left-0 text-emerald-200 dark:text-emerald-900/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                        <h1 className="text-5xl md:text-7xl font-bold text-stone-900 dark:text-white mb-6 tracking-tight">
+                            Share Food, <br />
+                            <span className="relative inline-block">
+                                <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent relative z-10">
+                                    Waste Less.
+                                </span>
+                                <svg
+                                    className="absolute -bottom-2 left-0 w-full h-3 text-emerald-500/50 -z-0"
+                                    viewBox="0 0 100 10"
+                                    preserveAspectRatio="none"
+                                >
+                                    <path
+                                        d="M0 5 Q 50 10 100 5"
+                                        stroke="currentColor"
+                                        strokeWidth="8"
+                                        fill="none"
+                                    />
                                 </svg>
                             </span>
                         </h1>
-
-                        <p className="text-xl md:text-2xl text-stone-600 dark:text-stone-400 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-                            The intelligent platform connecting restaurants with surplus food to NGOs feeding the hungry.
-                            <span className="text-stone-900 dark:text-stone-200 font-medium"> Zero waste, maximum impact.</span>
+                        <p className="text-xl text-stone-600 dark:text-stone-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                            Platr connects restaurants with surplus food to NGOs feeding the hungry.
+                            Join the movement to end food waste and hunger in your community.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -206,7 +214,8 @@ export default function LandingPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
                                 viewport={{ once: true }}
-                                className="p-8 rounded-3xl bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 hover:border-stone-200 dark:hover:border-stone-700 transition-all group hover:shadow-xl hover:shadow-stone-200/50 dark:hover:shadow-none"
+                                whileHover={{ y: -10, rotateX: 5, rotateY: 5, scale: 1.02 }}
+                                className="p-8 rounded-3xl bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 hover:border-stone-200 dark:hover:border-stone-700 transition-all group hover:shadow-2xl hover:shadow-emerald-900/10 dark:hover:shadow-emerald-900/20 perspective-1000"
                             >
                                 <div className={`w-14 h-14 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                                     <stat.icon size={28} />
@@ -266,28 +275,7 @@ export default function LandingPage() {
                             ))}
                         </div>
 
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-200/50 to-orange-200/50 dark:from-emerald-900/20 dark:to-orange-900/20 rounded-3xl blur-3xl" />
-                            <div className="relative bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-2xl shadow-stone-200/50 dark:shadow-none">
-                                {/* Abstract UI Representation */}
-                                <div className="space-y-4">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="w-32 h-4 bg-stone-200 dark:bg-stone-700 rounded-full" />
-                                        <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full" />
-                                    </div>
-                                    {[1, 2, 3].map((_, i) => (
-                                        <div key={i} className="flex items-center gap-4 p-4 bg-stone-50 dark:bg-stone-800 rounded-xl border border-stone-100 dark:border-stone-700">
-                                            <div className="w-10 h-10 rounded-lg bg-stone-200 dark:bg-stone-700" />
-                                            <div className="flex-1 space-y-2">
-                                                <div className="w-24 h-3 bg-stone-200 dark:bg-stone-700 rounded-full" />
-                                                <div className="w-16 h-2 bg-stone-100 dark:bg-stone-600 rounded-full" />
-                                            </div>
-                                            <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30" />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <TiltCard />
                     </div>
                 </div>
             </section>
@@ -297,7 +285,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-stone-500 dark:text-stone-400 text-sm">
                     <div className="flex items-center gap-2">
                         <Leaf size={16} className="text-emerald-600 dark:text-emerald-500" />
-                        <span>© 2024 Zero-Waste FoodLink</span>
+                        <span>© 2025 Platr</span>
                     </div>
                     <div className="flex gap-8">
                         <a href="#" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Privacy</a>
