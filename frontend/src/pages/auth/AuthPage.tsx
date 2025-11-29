@@ -37,6 +37,9 @@ export default function AuthPage() {
         // Simulate API call
         setTimeout(() => {
             setLoading(false);
+            // Save role to localStorage for persistence
+            localStorage.setItem('userRole', role);
+
             if (role === 'NGO') {
                 navigate('/ngo-dashboard');
             } else {

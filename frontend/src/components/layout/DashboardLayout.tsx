@@ -20,12 +20,20 @@ export default function DashboardLayout() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Mock role detection based on current path or local storage
-    // In a real app, this would come from an Auth Context
-    const isRestaurant = location.pathname.includes('restaurant');
-    const role = isRestaurant ? 'Restaurant' : 'NGO';
+    // Role detection from localStorage with fallback
+    const [role] = useState<'Restaurant' | 'NGO'>(() => {
+        const savedRole = localStorage.getItem('userRole');
+        // Fallback to URL detection if localStorage is empty (e.g. direct link)
+        if (!savedRole) {
+            return location.pathname.includes('restaurant') ? 'Restaurant' : 'NGO';
+        }
+        return savedRole as 'Restaurant' | 'NGO';
+    });
+
+    const isRestaurant = role === 'Restaurant';
 
     const handleLogout = () => {
+        localStorage.removeItem('userRole');
         navigate('/');
     };
 
