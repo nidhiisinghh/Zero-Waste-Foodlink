@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
     ArrowRight,
     ChefHat,
@@ -31,89 +31,7 @@ import {
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useCurveTransition } from '../components/ui/CurveTransition';
 
-const TiltCard = () => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
 
-    const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
-    const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-
-        const width = rect.width;
-        const height = rect.height;
-
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            className="relative w-full"
-        >
-            <div
-                style={{
-                    transform: "translateZ(75px)",
-                    transformStyle: "preserve-3d",
-                }}
-                className="relative bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-2xl shadow-stone-200/50 dark:shadow-none"
-            >
-                <div
-                    style={{
-                        transform: "translateZ(50px)",
-                    }}
-                    className="absolute inset-4 grid place-content-center rounded-xl shadow-lg"
-                >
-                    {/* Abstract UI Representation */}
-                    <div className="space-y-4 w-full">
-                        <div className="flex items-center justify-between mb-8">
-                            <div className="w-32 h-4 bg-stone-200 dark:bg-stone-700 rounded-full" />
-                            <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full" />
-                        </div>
-                        {[1, 2, 3].map((_, i) => (
-                            <div key={i} className="flex items-center gap-4 p-4 bg-stone-50 dark:bg-stone-800 rounded-xl border border-stone-100 dark:border-stone-700">
-                                <div className="w-10 h-10 rounded-lg bg-stone-200 dark:bg-stone-700" />
-                                <div className="flex-1 space-y-2">
-                                    <div className="w-24 h-3 bg-stone-200 dark:bg-stone-700 rounded-full" />
-                                    <div className="w-16 h-2 bg-stone-100 dark:bg-stone-600 rounded-full" />
-                                </div>
-                                <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-            <div
-                className="absolute inset-0 z-0 bg-gradient-to-tr from-emerald-200/50 to-orange-200/50 dark:from-emerald-900/20 dark:to-orange-900/20 rounded-3xl blur-3xl"
-                style={{
-                    transform: "translateZ(-50px)",
-                }}
-            />
-        </motion.div>
-    );
-};
 
 export default function LandingPage() {
     const navigate = useNavigate();
@@ -134,7 +52,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-600/20">
-                            <Leaf size={16} className="text-white" />
+                            <Soup size={16} className="text-white" />
                         </div>
                         <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                             Platr
@@ -360,7 +278,41 @@ export default function LandingPage() {
                             ))}
                         </div>
 
-                        <TiltCard />
+                        <motion.div
+                            animate={{
+                                y: [0, -20, 0],
+                                rotateX: [0, 5, 0],
+                                rotateY: [0, 5, 0],
+                            }}
+                            transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            style={{ transformPerspective: 1000 }}
+                            className="relative"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-200/50 to-orange-200/50 dark:from-emerald-900/20 dark:to-orange-900/20 rounded-3xl blur-3xl" />
+                            <div className="relative bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-2xl shadow-stone-200/50 dark:shadow-none">
+                                {/* Abstract UI Representation */}
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between mb-8">
+                                        <div className="w-32 h-4 bg-stone-200 dark:bg-stone-700 rounded-full" />
+                                        <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full" />
+                                    </div>
+                                    {[1, 2, 3].map((_, i) => (
+                                        <div key={i} className="flex items-center gap-4 p-4 bg-stone-50 dark:bg-stone-800 rounded-xl border border-stone-100 dark:border-stone-700">
+                                            <div className="w-10 h-10 rounded-lg bg-stone-200 dark:bg-stone-700" />
+                                            <div className="flex-1 space-y-2">
+                                                <div className="w-24 h-3 bg-stone-200 dark:bg-stone-700 rounded-full" />
+                                                <div className="w-16 h-2 bg-stone-100 dark:bg-stone-600 rounded-full" />
+                                            </div>
+                                            <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

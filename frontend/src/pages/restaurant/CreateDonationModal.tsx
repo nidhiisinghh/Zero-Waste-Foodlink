@@ -80,7 +80,7 @@ export default function CreateDonationModal({ isOpen, onClose, onCreate }: Creat
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed inset-0 m-auto w-full max-w-lg h-fit bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
+                        className="fixed inset-0 m-auto w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl shadow-2xl z-50 scrollbar-hide"
                     >
                         <div className="p-6 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between bg-stone-50 dark:bg-stone-800/50">
                             <h2 className="text-xl font-bold text-stone-900 dark:text-white">New Donation</h2>
