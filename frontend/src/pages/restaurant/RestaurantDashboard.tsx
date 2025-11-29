@@ -79,21 +79,21 @@ export default function RestaurantDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-gray-100 p-6 md:p-8 font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 p-6 md:p-8 font-sans selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-900 dark:selection:text-emerald-200 transition-colors duration-300">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
                 <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        <h1 className="text-3xl font-bold text-stone-900 dark:text-white">
                             Restaurant Dashboard
                         </h1>
-                        <p className="text-gray-400 mt-1">Track your contributions and environmental impact</p>
+                        <p className="text-stone-500 dark:text-stone-400 mt-1">Track your contributions and environmental impact</p>
                     </div>
 
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/20 active:scale-95"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-emerald-600/20 active:scale-95"
                     >
                         <Plus size={20} />
                         New Donation
@@ -106,14 +106,14 @@ export default function RestaurantDashboard() {
                         title="Total Donations"
                         value={mockStats.totalDonations + (donations.length - mockDonations.length)}
                         icon={Gift}
-                        color="text-purple-500"
+                        color="text-emerald-600 dark:text-emerald-400"
                         trend="+12% this month"
                     />
                     <StatCard
                         title="Meals Provided"
                         value={(mockStats.totalMealsProvided || 0) + donations.reduce((acc, curr) => !mockDonations.find(d => d.id === curr.id) ? acc + (curr.quantityMeals || 0) : acc, 0)}
                         icon={Utensils}
-                        color="text-orange-500"
+                        color="text-orange-500 dark:text-orange-400"
                         trend="+85 meals"
                     />
                     <StatCard
@@ -121,7 +121,7 @@ export default function RestaurantDashboard() {
                         value={(mockStats.totalCo2SavedKg || 0) + donations.reduce((acc, curr) => !mockDonations.find(d => d.id === curr.id) ? acc + (curr.impact?.co2SavedKg || 0) : acc, 0)}
                         unit="kg"
                         icon={Leaf}
-                        color="text-emerald-500"
+                        color="text-emerald-500 dark:text-emerald-400"
                         trend="+24kg saved"
                     />
                 </div>
@@ -129,11 +129,11 @@ export default function RestaurantDashboard() {
                 {/* Recent Activity */}
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                            <Clock size={20} className="text-blue-400" />
+                        <h2 className="text-xl font-semibold text-stone-900 dark:text-white flex items-center gap-2">
+                            <Clock size={20} className="text-emerald-600 dark:text-emerald-500" />
                             Donation History
                         </h2>
-                        <button className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                        <button className="text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors font-medium">
                             View All
                         </button>
                     </div>
@@ -147,7 +147,7 @@ export default function RestaurantDashboard() {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="h-24 bg-gray-900/30 rounded-2xl animate-pulse"
+                                        className="h-24 bg-stone-200 dark:bg-stone-800 rounded-2xl animate-pulse"
                                     />
                                 ))
                             ) : (
@@ -158,27 +158,27 @@ export default function RestaurantDashboard() {
                                         initial={{ opacity: 0, scale: 0.98 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         whileHover={{ scale: 1.01 }}
-                                        className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl p-5 hover:border-gray-700 transition-all group"
+                                        className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all group shadow-sm hover:shadow-md dark:shadow-none"
                                     >
                                         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
 
                                             <div className="flex items-start gap-4">
-                                                <div className="p-3 rounded-xl bg-gray-800/50 text-gray-400 group-hover:bg-blue-500/10 group-hover:text-blue-400 transition-colors">
+                                                <div className="p-3 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/20 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                                     <Utensils size={24} />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-lg font-semibold text-white mb-1">
+                                                    <h3 className="text-lg font-semibold text-stone-900 dark:text-white mb-1">
                                                         {donation.foodType}
                                                     </h3>
-                                                    <div className="flex items-center gap-3 text-sm text-gray-400">
+                                                    <div className="flex items-center gap-3 text-sm text-stone-500 dark:text-stone-400">
                                                         <span className="flex items-center gap-1">
                                                             <Calendar size={14} />
                                                             {new Date(donation.createdAt).toLocaleDateString()}
                                                         </span>
-                                                        <span className="w-1 h-1 rounded-full bg-gray-600" />
+                                                        <span className="w-1 h-1 rounded-full bg-stone-300 dark:bg-stone-600" />
                                                         <span>{donation.quantityMeals} meals</span>
-                                                        <span className="w-1 h-1 rounded-full bg-gray-600" />
-                                                        <span className="text-emerald-400 flex items-center gap-1">
+                                                        <span className="w-1 h-1 rounded-full bg-stone-300 dark:bg-stone-600" />
+                                                        <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                                                             <Leaf size={12} />
                                                             {donation.impact?.co2SavedKg}kg CO₂
                                                         </span>
@@ -188,11 +188,11 @@ export default function RestaurantDashboard() {
 
                                             <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
                                                 <div className="text-right mr-4 hidden md:block">
-                                                    <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Assigned NGO</div>
-                                                    <div className="text-sm font-medium text-gray-300">{donation.ngoName}</div>
+                                                    <div className="text-xs text-stone-400 dark:text-stone-500 uppercase tracking-wider mb-1">Assigned NGO</div>
+                                                    <div className="text-sm font-medium text-stone-700 dark:text-stone-300">{donation.ngoName}</div>
                                                 </div>
                                                 <StatusBadge status={donation.status} />
-                                                <button className="p-2 text-gray-500 hover:text-white transition-colors rounded-lg hover:bg-gray-800">
+                                                <button className="p-2 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 transition-colors rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800">
                                                     <MoreVertical size={20} />
                                                 </button>
                                             </div>

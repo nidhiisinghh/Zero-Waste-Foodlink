@@ -74,28 +74,28 @@ export default function HistoryPage() {
     });
 
     return (
-        <div className="p-6 md:p-8 max-w-7xl mx-auto">
+        <div className="p-6 md:p-8 max-w-7xl mx-auto min-h-screen bg-stone-50 dark:bg-stone-950 transition-colors duration-300">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                <h1 className="text-3xl font-bold text-white">Donation History</h1>
+                <h1 className="text-3xl font-bold text-stone-900 dark:text-white">Donation History</h1>
 
                 <div className="flex flex-col sm:flex-row gap-3">
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
                         <input
                             type="text"
                             placeholder="Search donations..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full sm:w-64 bg-gray-900 border border-gray-800 text-white pl-10 pr-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                            className="w-full sm:w-64 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-900 dark:text-white pl-10 pr-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all placeholder:text-stone-400 dark:placeholder:text-stone-500 shadow-sm"
                         />
                     </div>
 
                     <div className="relative">
-                        <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                        <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
                         <select
                             value={filterStatus}
                             onChange={(e) => setFilterStatus(e.target.value)}
-                            className="w-full sm:w-48 bg-gray-900 border border-gray-800 text-white pl-10 pr-8 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+                            className="w-full sm:w-48 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-900 dark:text-white pl-10 pr-8 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all appearance-none cursor-pointer shadow-sm"
                         >
                             <option value="ALL">All Status</option>
                             <option value="PENDING_NGO_CONFIRMATION">Pending</option>
@@ -107,11 +107,11 @@ export default function HistoryPage() {
                 </div>
             </div>
 
-            <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl overflow-hidden">
+            <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="border-b border-gray-800 text-gray-400 text-sm uppercase tracking-wider">
+                            <tr className="border-b border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-800/50 text-stone-500 dark:text-stone-400 text-sm uppercase tracking-wider">
                                 <th className="p-4 font-medium">Date</th>
                                 <th className="p-4 font-medium">Food Type</th>
                                 <th className="p-4 font-medium">Quantity</th>
@@ -120,7 +120,7 @@ export default function HistoryPage() {
                                 <th className="p-4 font-medium text-right">Impact</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-800">
+                        <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
                             <AnimatePresence>
                                 {filteredDonations.map((donation) => (
                                     <motion.tr
@@ -128,23 +128,23 @@ export default function HistoryPage() {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="group hover:bg-gray-800/50 transition-colors"
+                                        className="group hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors"
                                     >
-                                        <td className="p-4 text-gray-300">
+                                        <td className="p-4 text-stone-600 dark:text-stone-400">
                                             <div className="flex items-center gap-2">
-                                                <Calendar size={16} className="text-gray-500" />
+                                                <Calendar size={16} className="text-stone-400 dark:text-stone-500" />
                                                 {new Date(donation.createdAt).toLocaleDateString()}
                                             </div>
                                         </td>
-                                        <td className="p-4 font-medium text-white">{donation.foodType}</td>
-                                        <td className="p-4 text-gray-300">{donation.quantityMeals} meals</td>
-                                        <td className="p-4 text-gray-300">
+                                        <td className="p-4 font-medium text-stone-900 dark:text-white">{donation.foodType}</td>
+                                        <td className="p-4 text-stone-600 dark:text-stone-400">{donation.quantityMeals} meals</td>
+                                        <td className="p-4 text-stone-600 dark:text-stone-400">
                                             {donation.restaurantName || donation.ngoName}
                                         </td>
                                         <td className="p-4">
                                             <StatusBadge status={donation.status} />
                                         </td>
-                                        <td className="p-4 text-right font-medium text-emerald-400">
+                                        <td className="p-4 text-right font-medium text-emerald-600 dark:text-emerald-400">
                                             {donation.impact?.co2SavedKg}kg CO₂
                                         </td>
                                     </motion.tr>
@@ -155,7 +155,7 @@ export default function HistoryPage() {
                 </div>
 
                 {filteredDonations.length === 0 && (
-                    <div className="p-12 text-center text-gray-500">
+                    <div className="p-12 text-center text-stone-500 dark:text-stone-400">
                         No donations found matching your filters.
                     </div>
                 )}

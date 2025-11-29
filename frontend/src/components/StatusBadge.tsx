@@ -9,10 +9,10 @@ interface StatusBadgeProps {
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
     const styles = {
-        PENDING_NGO_CONFIRMATION: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-        ACCEPTED: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
-        REJECTED: "bg-red-500/10 text-red-500 border-red-500/20",
-        COLLECTED: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+        PENDING_NGO_CONFIRMATION: "bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-900/50",
+        ACCEPTED: "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50",
+        REJECTED: "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/50",
+        COLLECTED: "bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 border-stone-200 dark:border-stone-700",
     };
 
     const labels = {

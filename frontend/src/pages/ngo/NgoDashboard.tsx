@@ -145,16 +145,16 @@ export default function NgoDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-gray-100 p-6 md:p-8 font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 p-6 md:p-8 font-sans selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-900 dark:selection:text-emerald-200 transition-colors duration-300">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
                 <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        <h1 className="text-3xl font-bold text-stone-900 dark:text-white">
                             NGO Dashboard
                         </h1>
-                        <p className="text-gray-400 mt-1">Manage food donations and track impact</p>
+                        <p className="text-stone-500 dark:text-stone-400 mt-1">Manage food donations and track impact</p>
                     </div>
 
                     <div className="flex items-center gap-3">
@@ -162,17 +162,17 @@ export default function NgoDashboard() {
                             <select
                                 value={selectedNgo}
                                 onChange={(e) => setSelectedNgo(e.target.value)}
-                                className="appearance-none bg-gray-900 border border-gray-800 text-white pl-4 pr-10 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer min-w-[200px]"
+                                className="appearance-none bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-900 dark:text-white pl-4 pr-10 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 cursor-pointer min-w-[200px] shadow-sm"
                             >
                                 {NGO_OPTIONS.map(ngo => (
                                     <option key={ngo.id} value={ngo.id}>{ngo.name}</option>
                                 ))}
                             </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" size={16} />
                         </div>
                         <button
                             onClick={loadData}
-                            className="p-2.5 bg-gray-900 border border-gray-800 rounded-xl hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
+                            className="p-2.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 shadow-sm"
                         >
                             <RefreshCw size={20} className={cn(loading && "animate-spin")} />
                         </button>
@@ -185,27 +185,27 @@ export default function NgoDashboard() {
                         title="Total Donations"
                         value={stats?.totalDonations || 0}
                         icon={Gift}
-                        color="text-purple-500"
+                        color="text-emerald-600 dark:text-emerald-400"
                     />
                     <StatCard
                         title="Meals Served"
                         value={stats?.totalMealsServed || 0}
                         icon={Utensils}
-                        color="text-orange-500"
+                        color="text-orange-500 dark:text-orange-400"
                     />
                     <StatCard
                         title="Food Saved"
                         value={stats?.totalFoodSavedKg || 0}
                         unit="kg"
                         icon={Scale}
-                        color="text-emerald-500"
+                        color="text-emerald-500 dark:text-emerald-400"
                     />
                 </div>
 
                 {/* Donations List */}
                 <div className="space-y-4">
-                    <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                        <Clock size={20} className="text-blue-400" />
+                    <h2 className="text-xl font-semibold text-stone-900 dark:text-white flex items-center gap-2">
+                        <Clock size={20} className="text-emerald-600 dark:text-emerald-500" />
                         Recent Donations
                     </h2>
 
@@ -218,11 +218,11 @@ export default function NgoDashboard() {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="h-32 bg-gray-900/30 rounded-2xl animate-pulse"
+                                        className="h-32 bg-stone-200 dark:bg-stone-800 rounded-2xl animate-pulse"
                                     />
                                 ))
                             ) : donations.length === 0 ? (
-                                <div className="text-center py-12 text-gray-500 bg-gray-900/30 rounded-2xl border border-gray-800 border-dashed">
+                                <div className="text-center py-12 text-stone-500 dark:text-stone-400 bg-stone-100 dark:bg-stone-900/50 rounded-2xl border border-stone-200 dark:border-stone-800 border-dashed">
                                     No donations found for this NGO.
                                 </div>
                             ) : (
@@ -233,46 +233,46 @@ export default function NgoDashboard() {
                                         initial={{ opacity: 0, scale: 0.98 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.98 }}
-                                        className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl p-5 hover:border-gray-700 transition-colors"
+                                        className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors shadow-sm hover:shadow-md dark:shadow-none"
                                     >
                                         <div className="flex flex-col md:flex-row justify-between gap-4">
                                             <div className="space-y-3 flex-1">
                                                 <div className="flex items-start justify-between md:justify-start gap-3">
-                                                    <h3 className="text-lg font-semibold text-white">
+                                                    <h3 className="text-lg font-semibold text-stone-900 dark:text-white">
                                                         {donation.restaurantName}
                                                     </h3>
                                                     <StatusBadge status={donation.status} />
                                                 </div>
 
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 text-sm text-gray-400">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 text-sm text-stone-500 dark:text-stone-400">
                                                     <div className="flex items-center gap-2">
-                                                        <Utensils size={14} className="text-gray-500" />
-                                                        <span className="text-gray-300">{donation.aiAnalysis?.foodType}</span>
-                                                        <span className="text-gray-600">•</span>
+                                                        <Utensils size={14} className="text-stone-400 dark:text-stone-500" />
+                                                        <span className="text-stone-700 dark:text-stone-300">{donation.aiAnalysis?.foodType}</span>
+                                                        <span className="text-stone-300 dark:text-stone-600">•</span>
                                                         <span>~{donation.aiAnalysis?.estimatedMeals} meals</span>
                                                     </div>
                                                     <div className="flex items-center gap-2">
-                                                        <Clock size={14} className="text-gray-500" />
+                                                        <Clock size={14} className="text-stone-400 dark:text-stone-500" />
                                                         <span>{donation.aiAnalysis?.freshness}</span>
                                                     </div>
                                                 </div>
 
                                                 {donation.aiAnalysis?.notesForNGO && (
-                                                    <div className="text-sm bg-blue-500/5 text-blue-200/80 p-3 rounded-lg border border-blue-500/10 inline-block">
-                                                        <span className="font-semibold text-blue-400 text-xs uppercase tracking-wider mr-2">Note:</span>
+                                                    <div className="text-sm bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900/50 inline-block">
+                                                        <span className="font-semibold text-emerald-800 dark:text-emerald-300 text-xs uppercase tracking-wider mr-2">Note:</span>
                                                         {donation.aiAnalysis.notesForNGO}
                                                     </div>
                                                 )}
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex items-center gap-2 md:self-center pt-2 md:pt-0 border-t md:border-t-0 border-gray-800">
+                                            <div className="flex items-center gap-2 md:self-center pt-2 md:pt-0 border-t md:border-t-0 border-stone-100 dark:border-stone-800">
                                                 {donation.status === 'PENDING_NGO_CONFIRMATION' && (
                                                     <>
                                                         <button
                                                             onClick={() => handleStatusUpdate(donation.id, 'ACCEPTED')}
                                                             disabled={!!processingId}
-                                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm shadow-emerald-600/20"
                                                         >
                                                             {processingId === donation.id ? (
                                                                 <RefreshCw size={16} className="animate-spin" />
@@ -284,7 +284,7 @@ export default function NgoDashboard() {
                                                         <button
                                                             onClick={() => handleStatusUpdate(donation.id, 'REJECTED')}
                                                             disabled={!!processingId}
-                                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                            className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                                         >
                                                             <XCircle size={16} />
                                                             Reject
@@ -296,7 +296,7 @@ export default function NgoDashboard() {
                                                     <button
                                                         onClick={() => handleStatusUpdate(donation.id, 'COLLECTED')}
                                                         disabled={!!processingId}
-                                                        className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-stone-800 dark:bg-stone-700 hover:bg-stone-900 dark:hover:bg-stone-600 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                                                     >
                                                         {processingId === donation.id ? (
                                                             <RefreshCw size={16} className="animate-spin" />

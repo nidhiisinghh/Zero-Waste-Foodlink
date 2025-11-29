@@ -8,10 +8,12 @@ import {
     Menu,
     X,
     ChefHat,
-    HeartHandshake
+    HeartHandshake,
+    Leaf
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
+import { ThemeToggle } from '../ThemeToggle';
 
 export default function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -46,12 +48,12 @@ export default function DashboardLayout() {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-gray-100 font-sans selection:bg-blue-500/30 flex">
+        <div className="min-h-screen bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 font-sans selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-900 dark:selection:text-emerald-200 flex transition-colors duration-300">
 
             {/* Mobile Menu Button */}
             <button
                 onClick={() => setIsSidebarOpen(true)}
-                className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-900 border border-gray-800 rounded-lg text-white"
+                className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-600 dark:text-stone-400 shadow-sm"
             >
                 <Menu size={24} />
             </button>
@@ -64,7 +66,7 @@ export default function DashboardLayout() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsSidebarOpen(false)}
-                        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden"
+                        className="fixed inset-0 bg-stone-900/20 dark:bg-black/50 backdrop-blur-sm z-40 lg:hidden"
                     />
                 )}
             </AnimatePresence>
@@ -72,7 +74,7 @@ export default function DashboardLayout() {
             {/* Sidebar */}
             <motion.aside
                 className={cn(
-                    "fixed lg:sticky top-0 left-0 h-screen w-72 bg-gray-900/50 backdrop-blur-xl border-r border-gray-800 z-50 lg:translate-x-0 transition-transform duration-300",
+                    "fixed lg:sticky top-0 left-0 h-screen w-72 bg-white dark:bg-stone-900 border-r border-stone-200 dark:border-stone-800 z-50 lg:translate-x-0 transition-all duration-300 shadow-xl shadow-stone-200/50 dark:shadow-none",
                     isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
@@ -80,17 +82,17 @@ export default function DashboardLayout() {
                     {/* Header */}
                     <div className="flex items-center justify-between mb-8">
                         <div className="flex items-center gap-3">
-                            <div className={cn("p-2 rounded-lg", isRestaurant ? "bg-blue-500/10 text-blue-500" : "bg-purple-500/10 text-purple-500")}>
+                            <div className={cn("p-2 rounded-lg text-white shadow-md", isRestaurant ? "bg-stone-800 dark:bg-stone-700" : "bg-emerald-600")}>
                                 {isRestaurant ? <ChefHat size={24} /> : <HeartHandshake size={24} />}
                             </div>
                             <div>
-                                <h1 className="font-bold text-lg leading-tight">FoodLink</h1>
-                                <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">{role} Portal</span>
+                                <h1 className="font-bold text-lg leading-tight text-stone-900 dark:text-white">FoodLink</h1>
+                                <span className="text-xs text-stone-500 dark:text-stone-400 font-medium uppercase tracking-wider">{role} Portal</span>
                             </div>
                         </div>
                         <button
                             onClick={() => setIsSidebarOpen(false)}
-                            className="lg:hidden p-1 text-gray-400 hover:text-white"
+                            className="lg:hidden p-1 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300"
                         >
                             <X size={20} />
                         </button>
@@ -106,29 +108,40 @@ export default function DashboardLayout() {
                                 className={({ isActive }) => cn(
                                     "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
                                     isActive
-                                        ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
-                                        : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                                        ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 font-medium shadow-sm border border-emerald-100 dark:border-emerald-900/50"
+                                        : "text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800/50 hover:text-stone-900 dark:hover:text-stone-200"
                                 )}
                             >
-                                <item.icon size={20} />
-                                <span className="font-medium">{item.label}</span>
+                                {({ isActive }) => (
+                                    <>
+                                        <item.icon size={20} className={isActive ? "text-emerald-600 dark:text-emerald-400" : "text-stone-400 dark:text-stone-500 group-hover:text-stone-600 dark:group-hover:text-stone-300"} />
+                                        <span>{item.label}</span>
+                                    </>
+                                )}
                             </NavLink>
                         ))}
                     </nav>
 
-                    {/* Logout */}
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors mt-auto"
-                    >
-                        <LogOut size={20} />
-                        <span className="font-medium">Sign Out</span>
-                    </button>
+                    {/* Footer Actions */}
+                    <div className="mt-auto space-y-4">
+                        <div className="flex items-center justify-between px-4 py-2">
+                            <span className="text-sm font-medium text-stone-500 dark:text-stone-400">Theme</span>
+                            <ThemeToggle />
+                        </div>
+
+                        <button
+                            onClick={handleLogout}
+                            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-stone-500 dark:text-stone-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors group"
+                        >
+                            <LogOut size={20} className="group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors" />
+                            <span className="font-medium">Sign Out</span>
+                        </button>
+                    </div>
                 </div>
             </motion.aside>
 
             {/* Main Content */}
-            <main className="flex-1 min-w-0">
+            <main className="flex-1 min-w-0 bg-stone-50 dark:bg-stone-950 transition-colors duration-300">
                 <Outlet />
             </main>
 

@@ -20,80 +20,80 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className="p-6 md:p-8 max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold text-white mb-8">Profile Settings</h1>
+        <div className="p-6 md:p-8 max-w-4xl mx-auto min-h-screen bg-stone-50 dark:bg-stone-950 transition-colors duration-300">
+            <h1 className="text-3xl font-bold text-stone-900 dark:text-white mb-8">Profile Settings</h1>
 
-            <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl p-6 md:p-8">
+            <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-6 md:p-8 shadow-sm">
                 <div className="flex items-center gap-6 mb-8">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-3xl font-bold text-white">
+                    <div className="w-24 h-24 rounded-full bg-emerald-100 dark:bg-emerald-900/20 flex items-center justify-center text-3xl font-bold text-emerald-600 dark:text-emerald-400">
                         {formData.name.charAt(0)}
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-white">{formData.name}</h2>
-                        <p className="text-gray-400">{formData.organization}</p>
+                        <h2 className="text-xl font-bold text-stone-900 dark:text-white">{formData.name}</h2>
+                        <p className="text-stone-500 dark:text-stone-400">{formData.organization}</p>
                     </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                                <User size={16} /> Full Name
+                            <label className="text-sm font-medium text-stone-700 dark:text-stone-300 flex items-center gap-2">
+                                <User size={16} className="text-stone-400 dark:text-stone-500" /> Full Name
                             </label>
                             <input
                                 type="text"
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                className="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                                <Mail size={16} /> Email Address
+                            <label className="text-sm font-medium text-stone-700 dark:text-stone-300 flex items-center gap-2">
+                                <Mail size={16} className="text-stone-400 dark:text-stone-500" /> Email Address
                             </label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                className="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                                <Phone size={16} /> Phone Number
+                            <label className="text-sm font-medium text-stone-700 dark:text-stone-300 flex items-center gap-2">
+                                <Phone size={16} className="text-stone-400 dark:text-stone-500" /> Phone Number
                             </label>
                             <input
                                 type="tel"
                                 value={formData.phone}
                                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                className="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                                <Building size={16} /> Organization Name
+                            <label className="text-sm font-medium text-stone-700 dark:text-stone-300 flex items-center gap-2">
+                                <Building size={16} className="text-stone-400 dark:text-stone-500" /> Organization Name
                             </label>
                             <input
                                 type="text"
                                 value={formData.organization}
                                 onChange={e => setFormData({ ...formData, organization: e.target.value })}
-                                className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                className="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                             />
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                            <MapPin size={16} /> Address
+                        <label className="text-sm font-medium text-stone-700 dark:text-stone-300 flex items-center gap-2">
+                            <MapPin size={16} className="text-stone-400 dark:text-stone-500" /> Address
                         </label>
                         <textarea
                             rows={3}
                             value={formData.address}
                             onChange={e => setFormData({ ...formData, address: e.target.value })}
-                            className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
+                            className="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-900 dark:text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all resize-none"
                         />
                     </div>
 
@@ -101,7 +101,7 @@ export default function ProfilePage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+                            className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition-colors flex items-center gap-2 disabled:opacity-50 shadow-lg shadow-emerald-600/20"
                         >
                             {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                             Save Changes
