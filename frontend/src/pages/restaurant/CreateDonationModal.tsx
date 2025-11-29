@@ -1,0 +1,154 @@
+import { useState } from 'react';
+import {
+    X,
+    Loader2,
+    AlertCircle
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { type Donation } from '../../types/donation';
+
+interface CreateDonationModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onCreate: (donation: Donation) => void;
+}
+
+export default function CreateDonationModal({ isOpen, onClose, onCreate }: CreateDonationModalProps) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formData, setFormData] = useState({
+        foodType: '',
+        quantity: '',
+        freshness: 'Good for 24 hours',
+        notes: ''
+    });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const newDonation: Donation = {
+            id: `d${Date.now()}`,
+            ngoName: "Pending Assignment",
+            foodType: formData.foodType,
+            quantityMeals: parseInt(formData.quantity) || 0,
+            status: "PENDING_NGO_CONFIRMATION",
+            createdAt: new Date().toISOString(),
+            impact: { co2SavedKg: (parseInt(formData.quantity) || 0) * 0.5 }
+        };
+
+        onCreate(newDonation);
+        setIsSubmitting(false);
+        onClose();
+        setFormData({ foodType: '', quantity: '', freshness: 'Good for 24 hours', notes: '' });
+    };
+
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+                        onClick={onClose}
+                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        className="fixed inset-0 m-auto w-full max-w-lg h-fit bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
+                    >
+                        <div className="p-6 border-b border-gray-800 flex items-center justify-between">
+                            <h2 className="text-xl font-bold text-white">New Donation</h2>
+                            <button
+                                onClick={onClose}
+                                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-300">Food Type</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.foodType}
+                                    onChange={e => setFormData({ ...formData, foodType: e.target.value })}
+                                    placeholder="e.g., Leftover Catering Trays"
+                                    className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">Quantity (Meals)</label>
+                                    <input
+                                        type="number"
+                                        required
+                                        min="1"
+                                        value={formData.quantity}
+                                        onChange={e => setFormData({ ...formData, quantity: e.target.value })}
+                                        placeholder="e.g., 50"
+                                        className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">Freshness</label>
+                                    <select
+                                        value={formData.freshness}
+                                        onChange={e => setFormData({ ...formData, freshness: e.target.value })}
+                                        className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none"
+                                    >
+                                        <option>Good for 2 hours</option>
+                                        <option>Good for 4 hours</option>
+                                        <option>Good for 12 hours</option>
+                                        <option>Good for 24 hours</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-300">Notes</label>
+                                <textarea
+                                    rows={3}
+                                    value={formData.notes}
+                                    onChange={e => setFormData({ ...formData, notes: e.target.value })}
+                                    placeholder="Any specific details (allergens, packaging, etc.)"
+                                    className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
+                                />
+                            </div>
+
+                            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 flex gap-3 text-sm text-blue-200">
+                                <AlertCircle size={20} className="text-blue-400 shrink-0" />
+                                <p>Our AI will automatically match this donation with the most suitable NGO based on location and need.</p>
+                            </div>
+
+                            <div className="pt-2 flex gap-3">
+                                <button
+                                    type="button"
+                                    onClick={onClose}
+                                    className="flex-1 px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl font-medium transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                                >
+                                    {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : 'Create Donation'}
+                                </button>
+                            </div>
+                        </form>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+}
